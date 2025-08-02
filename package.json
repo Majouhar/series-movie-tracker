@@ -1,0 +1,31 @@
+{
+  "name": "movie-series-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "prisma": "prisma"
+  },
+  "dependencies": {
+    "@prisma/client": "latest",
+    "autoprefixer": "latest",
+    "bcryptjs": "latest",
+    "cookie": "latest",
+    "date-fns": "latest",
+    "jsonwebtoken": "latest",
+    "next": "latest",
+    "postcss": "latest",
+    "prisma": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/node": "24.1.0",
+    "@types/react": "19.1.9",
+    "typescript": "5.9.2"
+  }
+}
