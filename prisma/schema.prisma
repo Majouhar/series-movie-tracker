@@ -1,0 +1,40 @@
+// This file defines your database schema using Prisma.
+
+// The Prisma client generator will output TypeScript code that can be imported
+// throughout the Next.js application to perform type‑safe queries against
+// PostgreSQL. See https://www.prisma.io for more information.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  items     Item[]
+}
+
+model Item {
+  id          Int      @id @default(autoincrement())
+  imdbId      String   @unique
+  title       String
+  type        ItemType
+  releaseDate DateTime?
+  poster      String?
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  createdAt   DateTime @default(now())
+}
+
+enum ItemType {
+  MOVIE
+  SERIES
+}
