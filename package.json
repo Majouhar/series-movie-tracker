@@ -10,22 +10,22 @@
   },
   "dependencies": {
     "@prisma/client": "latest",
-    "autoprefixer": "latest",
+    "@tailwindcss/postcss": "^4.1.11",
     "bcryptjs": "latest",
     "cookie": "latest",
     "date-fns": "latest",
     "jsonwebtoken": "latest",
     "next": "latest",
-    "postcss": "latest",
     "prisma": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "tailwindcss": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "24.1.0",
     "@types/react": "19.1.9",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11",
     "typescript": "5.9.2"
   }
 }
