@@ -18,6 +18,30 @@ export default function DashboardPage() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<"MOVIE" | "SERIES">("MOVIE");
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+
+  const handleDelete = async (id: number) => {
+    const item = items.find((i) => i.id === id);
+    const confirmed = window.confirm(
+      `Are you sure you want to remove "${item?.title}" from your list?`
+    );
+    if (!confirmed) return;
+
+    setDeletingId(id);
+    try {
+      const res = await fetch(`/api/items/${id}`, { method: "DELETE" });
+      if (res.ok) {
+        setItems((prev) => prev.filter((item) => item.id !== id));
+      } else {
+        const error = await res.json();
+        alert(error?.error || "Failed to delete item.");
+      }
+    } catch {
+      alert("An unexpected error occurred.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   useEffect(() => {
     async function fetchItems() {
@@ -76,7 +100,12 @@ export default function DashboardPage() {
           ) : (
             <div className="grid gap-6 md:grid-cols-2">
               {filtered.map((item) => (
-                <ItemCard key={item.id} item={item} />
+                <ItemCard
+                  key={item.id}
+                  item={item}
+                  onToggleWatched={() => handleDelete(item.id)}
+                  deleting={deletingId === item.id}
+                />
               ))}
             </div>
           )}
