@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import NavBar from "../../components/NavBar";
 import ItemCard from "../../components/ItemCard";
+import { THEME } from "../../lib/constants";
 
 interface Item {
   id: number;
@@ -74,7 +75,9 @@ export default function DashboardPage() {
       <main className="max-w-4xl mx-auto py-10 px-4 sm:px-8">
         <h1 className="text-4xl font-extrabold mb-8 tracking-tight text-slate-100 drop-shadow-lg">
           Your{" "}
-          <span className="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-500 bg-clip-text text-transparent drop-shadow">
+          <span
+            className={`bg-gradient-to-r ${THEME.textClass} bg-clip-text text-transparent drop-shadow`}
+          >
             Dashboard
           </span>
         </h1>

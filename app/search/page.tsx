@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import NavBar from "../../components/NavBar";
+import { THEME } from "../../lib/constants";
 
 interface SearchResult {
   imdbID: string;
@@ -57,11 +58,15 @@ export default function SearchPage() {
       <div className="max-w-4xl mx-auto py-8 px-3 sm:px-6 lg:px-8">
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-slate-100 text-center tracking-tight drop-shadow-lg">
           Search{" "}
-          <span className="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-500 bg-clip-text text-transparent">
+          <span
+            className={`bg-gradient-to-r ${THEME.textClass} bg-clip-text text-transparent`}
+          >
             Movies
           </span>{" "}
           &amp;{" "}
-          <span className="bg-gradient-to-r from-pink-500 via-fuchsia-400 to-indigo-400 bg-clip-text text-transparent">
+          <span
+            className={`bg-gradient-to-r ${THEME.textReverse} bg-clip-text text-transparent`}
+          >
             Series
           </span>
         </h1>

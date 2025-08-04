@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { THEME } from "../lib/constants";
 
 export default function Home() {
   return (
@@ -6,7 +7,9 @@ export default function Home() {
       <div className="w-full max-w-xl mx-auto bg-white/10 backdrop-blur-2xl rounded-2xl shadow-2xl px-6 py-14 flex flex-col items-center border border-fuchsia-400/20">
         <h1 className="text-4xl sm:text-5xl font-extrabold mb-6 text-center tracking-tight text-slate-100 drop-shadow-xl">
           Movie{" "}
-          <span className="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-500 bg-clip-text text-transparent">
+          <span
+            className={`bg-gradient-to-r ${THEME.textClass} bg-clip-text text-transparent`}
+          >
             &amp;
           </span>{" "}
           Series Tracker
