@@ -19,6 +19,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<"MOVIE" | "SERIES">("MOVIE");
   const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [animEffect, setAnimEffect] = useState(false);
 
   const handleDelete = async (id: number) => {
     const item = items.find((i) => i.id === id);
@@ -57,26 +58,38 @@ export default function DashboardPage() {
     fetchItems();
   }, [router]);
 
+  useEffect(() => {
+    setAnimEffect(true);
+  }, []);
+
   const filtered = items.filter((item) => item.type === tab);
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-gray-50 via-white to-blue-50">
+    <div
+      className={`min-h-screen bg-gradient-to-tr from-indigo-900/10 via-fuchsia-900/10 to-blue-900/10 transition-all  duration-4000  ${
+        animEffect ? "backdrop-blur-xl" : ""
+      }`}
+    >
       <NavBar />
       <main className="max-w-4xl mx-auto py-10 px-4 sm:px-8">
-        <h1 className="text-4xl font-extrabold mb-8 tracking-tight text-gray-900 drop-shadow-sm">
-          Your <span className="text-blue-600">Dashboard</span>
+        <h1 className="text-4xl font-extrabold mb-8 tracking-tight text-slate-100 drop-shadow-lg">
+          Your{" "}
+          <span className="bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-pink-500 bg-clip-text text-transparent drop-shadow">
+            Dashboard
+          </span>
         </h1>
 
+        {/* Glassy Tab Buttons */}
         <div className="mb-10 flex gap-4">
           {["MOVIE", "SERIES"].map((type) => (
             <button
               key={type}
               onClick={() => setTab(type as "MOVIE" | "SERIES")}
-              className={`transition-all duration-200 px-6 py-2 rounded-xl font-semibold shadow-sm border
+              className={`transition-all duration-200 px-6 py-2 rounded-xl font-semibold shadow-lg border text-lg
                 ${
                   tab === type
-                    ? "bg-white bg-opacity-70 border-blue-500 text-blue-700 shadow-md backdrop-blur-sm"
-                    : "bg-white bg-opacity-40 border-transparent text-gray-500 hover:bg-opacity-60 hover:text-blue-500"
+                    ? "bg-gradient-to-tr from-indigo-600/80 via-fuchsia-500/80 to-pink-400/80 border-fuchsia-400/40 text-white ring-2 ring-fuchsia-300/30 backdrop-blur"
+                    : "bg-white/20 border-transparent text-slate-100 hover:bg-fuchsia-400/20 hover:text-white hover:border-fuchsia-300/20 backdrop-blur-sm"
                 }
               `}
             >
@@ -88,12 +101,12 @@ export default function DashboardPage() {
         <section>
           {loading ? (
             <div className="flex justify-center items-center py-16">
-              <span className="loader animate-spin rounded-full border-4 border-blue-500 border-t-transparent h-8 w-8 mr-3"></span>
-              <span className="text-gray-500 text-lg">Loading...</span>
+              <span className="loader animate-spin rounded-full border-4 border-fuchsia-500 border-t-transparent h-8 w-8 mr-3"></span>
+              <span className="text-fuchsia-200 text-lg">Loading...</span>
             </div>
           ) : filtered.length === 0 ? (
-            <div className="bg-white/70 border border-gray-200 rounded-lg p-8 text-center shadow-inner">
-              <p className="text-gray-400 text-lg">
+            <div className="bg-white/20 border border-fuchsia-400/20 rounded-xl p-8 text-center shadow-xl backdrop-blur">
+              <p className="text-fuchsia-200 text-lg">
                 You have no {tab === "MOVIE" ? "movies" : "series"} added.
               </p>
             </div>

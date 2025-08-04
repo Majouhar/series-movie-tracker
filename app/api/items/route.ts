@@ -30,7 +30,7 @@ export async function GET() {
         releaseDate: true,
         poster: true,
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { releaseDate: 'asc' },
     });
     return NextResponse.json({ items });
   } catch (err) {

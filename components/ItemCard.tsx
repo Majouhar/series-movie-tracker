@@ -62,46 +62,57 @@ export default function ItemCard({
   deleting,
 }: ItemCardProps) {
   const [blink, setBlink] = useState(false);
-  // Determine release status
+
+  // Status theme
   let status: string;
-  let statusColor = "text-gray-700";
+  let statusColor = "text-slate-300"; // default, neutral
   if (item.releaseDate) {
     const releaseDate = new Date(item.releaseDate);
     const today = new Date();
     const diff = differenceInCalendarDays(releaseDate, today);
     if (diff <= 0) {
       status = "Released";
-      statusColor = "text-green-600";
+      statusColor = "text-fuchsia-400";
     } else {
       status = `${diff} day${diff === 1 ? "" : "s"} left`;
-      statusColor = "text-blue-600";
+      statusColor = "text-indigo-300";
     }
   } else {
     status = "Unknown release date";
-    statusColor = "text-gray-400";
+    statusColor = "text-slate-400";
   }
+
+  // Blinking effect on delete
   useEffect(() => {
     let intervalId: any;
     if (deleting) {
       intervalId = setInterval(() => {
         setBlink((prev) => !prev);
       }, 100);
+    } else {
+      setBlink(false);
     }
     return () => clearInterval(intervalId);
   }, [deleting]);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-4 bg-white/70 backdrop-blur-md border border-gray-100 rounded-2xl shadow-lg p-4 hover:scale-[1.02] transition-transform duration-150">
+    <div
+      className="flex flex-col sm:flex-row items-center gap-4 
+      bg-white/10 backdrop-blur-xl border border-fuchsia-400/20 
+      rounded-2xl shadow-2xl p-4 
+      hover:scale-[1.02] transition-transform duration-200
+      hover:border-fuchsia-400/40"
+    >
       <div className="relative">
         {item.poster ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={item.poster}
             alt={item.title}
-            className="w-20 h-28 object-cover rounded-xl shadow-sm bg-white/50"
+            className="w-20 h-28 object-cover rounded-xl shadow-md bg-white/20"
           />
         ) : (
-          <div className="w-20 h-28 bg-gray-200 flex items-center justify-center rounded-xl text-gray-400 text-xs font-medium shadow-inner">
+          <div className="w-20 h-28 bg-slate-300/10 flex items-center justify-center rounded-xl text-slate-400 text-xs font-medium shadow-inner">
             No Image
           </div>
         )}
@@ -111,30 +122,32 @@ export default function ItemCard({
           type="button"
           onClick={onToggleWatched}
           disabled={deleting}
-          className={`absolute top-1 right-1 bg-white/80 rounded-full p-1 shadow transition 
-            ring-2 ring-emerald-400`}
+          className={`
+            absolute top-1 right-1 
+            bg-white/40 hover:bg-fuchsia-300/30 
+            rounded-full p-1 shadow
+            transition-all duration-200
+            ring-2 ring-fuchsia-400/60
+            ${deleting ? "animate-pulse" : ""}
+          `}
         >
           {blink ? (
-            <EyeClosedIcon
-              className={`w-5 h-5 cursor-pointer text-emerald-500 text-gray-300"}`}
-            />
+            <EyeClosedIcon className="w-5 h-5 text-fuchsia-400 opacity-70" />
           ) : (
-            <EyeIcon
-              className={`w-5 h-5 cursor-pointer text-emerald-500 text-gray-300"}`}
-            />
+            <EyeIcon className="w-5 h-5 text-fuchsia-400" />
           )}
         </button>
       </div>
       <div className="flex-1 w-full">
-        <h3 className="text-xl font-semibold mb-1 text-gray-900">
+        <h3 className="text-xl font-bold mb-1 text-slate-100 drop-shadow">
           {item.title}
         </h3>
         <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-          <span className="text-sm capitalize text-gray-500">
+          <span className="text-sm capitalize text-slate-400">
             {item.type.toLowerCase()}
           </span>
           {item.releaseDate && (
-            <span className="text-sm text-gray-400">
+            <span className="text-sm text-slate-400">
               {format(new Date(item.releaseDate), "MMM d, yyyy")}
             </span>
           )}
