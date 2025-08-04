@@ -27,7 +27,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-indigo-900/10 via-fuchsia-900/10 to-blue-900/10 px-2 py-8">
+    <div
+      className={`min-h-screen flex items-center justify-center bg-gradient-to-tr ${THEME.background} px-2 py-8`}
+    >
       <div className="w-full max-w-md bg-white/10 rounded-2xl shadow-2xl px-6 py-10 sm:px-8 space-y-8 border border-fuchsia-400/20">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-slate-100 mb-2 drop-shadow">
           Login to your{" "}

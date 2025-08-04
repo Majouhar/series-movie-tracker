@@ -67,7 +67,7 @@ export default function DashboardPage() {
 
   return (
     <div
-      className={`min-h-screen bg-gradient-to-tr from-indigo-900/10 via-fuchsia-900/10 to-blue-900/10 transition-all  duration-4000  ${
+      className={`min-h-screen bg-gradient-to-tr ${THEME.background} transition-all  duration-4000  ${
         animEffect ? "backdrop-blur-xl" : ""
       }`}
     >
